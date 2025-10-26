@@ -52,7 +52,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: linear-gradient(135deg, rgba(248, 249, 250, 0.95) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(241, 243, 244, 0.95) 100%);
+    background: linear-gradient(135deg, var(--accent-color) 0%, #1a2332 50%, var(--accent-color) 100%);
     backdrop-filter: blur(25px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 
                 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -79,7 +79,7 @@ body {
 }
 
 .navbar.scrolled {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 250, 0.95) 50%, rgba(241, 243, 244, 0.98) 100%);
+    background: linear-gradient(135deg, var(--accent-color) 0%, #1a2332 50%, var(--accent-color) 100%);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 
                 0 2px 8px rgba(0, 0, 0, 0.08);
     border-bottom: 2px solid rgba(245, 183, 26, 0.3);
@@ -125,26 +125,26 @@ body {
 /* Removed hover effects from logo image */
 
 .logo-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
 .logo-title {
     font-size: 1.8rem;
     font-weight: 700;
-    background: linear-gradient(135deg, rgba(24, 48, 90, 0.9) 0%, rgba(245, 183, 26, 0.8) 50%, rgba(199, 33, 39, 0.9) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--white);
     transition: all 0.3s ease;
     letter-spacing: 0.5px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .logo-subtitle {
     font-size: 0.75rem;
-    color: rgba(24, 48, 90, 0.7);
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     opacity: 0.85;
     transition: all 0.3s ease;
@@ -152,7 +152,7 @@ body {
 
 .nav-logo:hover .logo-subtitle {
     opacity: 1;
-    color: rgba(245, 183, 26, 0.9);
+    color: var(--primary-color);
 }
 
 .nav-right {
@@ -182,7 +182,7 @@ body {
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: #18305A;
+    color: var(--white);
     font-weight: 600;
     padding: 12px 20px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -194,7 +194,7 @@ body {
 
 .nav-link:hover,
 .nav-link.active {
-    color: #C72127;
+    color: var(--primary-color);
 }
 
 .nav-icon {
@@ -1899,6 +1899,27 @@ body {
 .map-header h3 i {
     color: var(--primary-color);
     font-size: 2rem;
+}
+
+.map-logo {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-right: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(245, 183, 26, 0.3);
+    transition: all 0.3s ease;
+}
+
+.map-logo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(245, 183, 26, 0.4);
+}
+
+/* RTL support for map logo */
+[dir="rtl"] .map-logo {
+    margin-right: 0;
+    margin-left: 10px;
 }
 
 .map-wrapper {
@@ -4609,12 +4630,29 @@ body[data-lang="fr"] {
     right: 0;
     bottom: 0;
     z-index: 1;
+    background-image: url('images/schoolback.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 
 .hero-shapes {
     position: absolute;
     width: 100%;
     height: 100%;
+    z-index: 2;
 }
 
 .shape {
@@ -4666,6 +4704,8 @@ body[data-lang="fr"] {
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
+    position: relative;
+    z-index: 3;
 }
 
 .hero-left {
@@ -4741,7 +4781,7 @@ body[data-lang="fr"] {
 
 .modern-hero-subtitle {
     font-size: 1.2rem;
-    color: var(--text-light);
+    color: #ffffff;
     line-height: 1.6;
     margin-bottom: 32px;
     max-width: 500px;

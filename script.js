@@ -269,14 +269,38 @@ function initContactForm() {
             
             // Validate form
             if (validateForm(formObject)) {
-                // Show success message
-                showMessage(window.messageManager.getMessage('success'), 'success');
+                // Send to WhatsApp
+                sendToWhatsApp(formObject);
+                showMessage('تم إرسال رسالتك بنجاح إلى الواتساب!', 'success');
                 contactForm.reset();
             } else {
-                showMessage(window.messageManager.getMessage('error'), 'error');
+                showMessage('يرجى ملء جميع الحقول بشكل صحيح', 'error');
             }
         });
     }
+}
+
+// Send message to WhatsApp
+function sendToWhatsApp(data) {
+    const phoneNumber = '9671411357'; // Yemen phone number
+    
+    // Create WhatsApp message
+    const message = `🏫 رسالة جديدة من موقع مدرسة اليمن العظمى\n\n` +
+                   `👤 الاسم: ${data.name}\n` +
+                   `📧 البريد الإلكتروني: ${data.email}\n` +
+                   `📱 رقم الهاتف: ${data.phone || 'غير محدد'}\n` +
+                   `📝 الموضوع: ${data.subject}\n` +
+                   `💬 الرسالة:\n${data.message}\n\n` +
+                   `⏰ تاريخ الإرسال: ${new Date().toLocaleString('ar-YE')}`;
+    
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Create WhatsApp URL
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
 }
 
 // Form validation
